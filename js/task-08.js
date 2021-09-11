@@ -1,37 +1,40 @@
-const refs = {
-  createBtnEl: document.querySelector('[data-action="render"]'),
-  clearBtnEl: document.querySelector('[data-action="destroy"]'),
-  inputEl: document.querySelector('.input'),
-  boxesEl: document.querySelector('#boxes'),
-  
-}
+const input = document.querySelector(`#controls input[type="number"]`)
 
-let addWidth = 10
+const createBtn = document.querySelector(`#controls button[data-action="render"]`);
 
-refs.createBtnEl.addEventListener('click', createBoxes);
-refs.clearBtnEl.addEventListener('click', destroyBoxes);
+const removeBtn = document.querySelector(`#controls button[data-action="destroy"]`);
 
-function getRandom(min, max) {
-  
-      return Math.ceil(Math.random() * (max - min) + min)
-}
+const boxesContainer = document.querySelector(`#boxes`);
 
-function createBoxes(amount) {
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+};
 
-  let box = refs.boxesEl.children.length;
-  amount = refs.inputEl.value - 1;
-  box = document.createElement('div');
+let width = 30;
+let height = 30;
 
-  box.style.backgroundColor = `rgb(${getRandom(0, 255)}, ${getRandom(0, 255)}, ${getRandom(0, 255)})`;
-  box.style.width = `${30 + addWidth}px`;
-  box.style.height = `${30 + addWidth}px`;
-  addWidth += 10
-  
-  refs.boxesEl.append(box)
+const createBoxes = (amount) => {
+   for (let i = 0; i < amount; i++) {
+      const newDiv = document.createElement(`div`);
+      newDiv.style.width = `${width}px`;
+      newDiv.style.height = `${height}px`;
+      width += 10;
+      height += 10;
+      boxesContainer.append(newDiv);
+      newDiv.style.backgroundColor = `rgb(${getRandomInt(256)}, ${getRandomInt(256)}, ${getRandomInt(256)})`
+   };
+};
 
-}
+const destroyBoxes = () => {
+   boxesContainer.innerHTML = ``;
+   width = 30;
+   height = 30;
+};
 
-function destroyBoxes() {
-  
-  refs.boxesEL.remove(box);
-}
+createBtn.addEventListener(`click`, () => {
+   createBoxes(input.value);
+});
+
+removeBtn.addEventListener(`click`, () => {
+   destroyBoxes();
+});

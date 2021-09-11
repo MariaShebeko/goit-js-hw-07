@@ -1,7 +1,6 @@
 const refs = {
   input: document.querySelector('#font-size-control'),
-  text: document.querySelector('#text'),
-  
+  text: document.querySelector('#text'), 
 }
 
 refs.input.addEventListener('input', onInputChange);

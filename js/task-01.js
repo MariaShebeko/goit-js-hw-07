@@ -1,13 +1,10 @@
-const refs = {
-  categoriesListEl: document.querySelector('#categories'),
-  categoriesItemEl: document.querySelectorAll('.item h2'),
-  
+const categoriesListEl = document.querySelector('#categories');
+
+console.log(`В списке ${categoriesListEl.children.length} категории`);
+
+for (const item of categoriesListEl.children) {
+  console.log(`Категория: ${item.firstElementChild.textContent}, 
+  Количество элементов: ${item.lastElementChild.children.length}`)
 }
 
-const itemsEl = refs.categoriesListEl.children;
-console.log(`В списке ${itemsEl.length} категорий`);
-
-refs.categoriesItemEl.forEach(item =>
-  console.log(`Категория: ${item.textContent}, 
-  Количество элементов: ${item.nextElementSibling.children.length}`))
 
